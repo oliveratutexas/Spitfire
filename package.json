@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/oliveratutexas/Casper#readme",
   "dependencies": {
-    "cmu-pronouncing-dictionary": "^1.0.3"
+    "cmu-pronouncing-dictionary": "^1.0.3",
+    "rhymes": "^1.0.1"
   }
 }
