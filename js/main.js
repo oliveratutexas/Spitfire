@@ -1,5 +1,20 @@
 const rhymes = require('./custom-rhymes.js');
 
+if (!('webkitSpeechRecognition' in window)) {
+    console.log('no speech API');
+} else {
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  recognition.onstart = function() { console.log('started'); }
+  recognition.onresult = function(event) {}
+  recognition.onerror = function(event) {}
+  recognition.onend = function() {}
+  
+  recognition.start();
+}
+
 var suggestionsNode = document.querySelector('.suggestions');
 var firstWordNode = suggestionsNode.querySelector('.first');
 var secondWordNode = suggestionsNode.querySelector('.second');
