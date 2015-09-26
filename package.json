@@ -1,0 +1,22 @@
+{
+  "name": "casper",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliveratutexas/Casper.git"
+  },
+  "author": "Nishanth Shanmugham <nishanth.gerrard@gmail.com> (http://nishanths.github.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oliveratutexas/Casper/issues"
+  },
+  "homepage": "https://github.com/oliveratutexas/Casper#readme",
+  "dependencies": {
+    "cmu-pronouncing-dictionary": "^1.0.3"
+  }
+}
