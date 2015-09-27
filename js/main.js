@@ -33,9 +33,9 @@ var compute = function() {
     console.log('computing')
     var full = interim_transcript.split(/\s+/);
     var last = full[full.length - 1];
-    // var results = rhymes.rhymes(last);
-    
+    var results = rhymes.rhymes(last);
     console.log('split interim', full);
+    console.log('results', results);
     
     // if (results[0]) { 
     //     console.log(results[0].word); 

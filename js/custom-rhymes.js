@@ -1,61 +1,16 @@
-const cmu_dict = require('cmu-pronouncing-dictionary');
-const merge = require('lodash').merge
-const sortBy = require('lodash').sortBy
-
-var words = [];
-
-Object.keys(cmu_dict).forEach(function (word) {
-  words.push({
-    word: word,
-    pron: cmu_dict[word]
-  })
-})  
-
-var countMatchingTrailingSyllablesInPronunciations = function(a, b) {
-  a = a.split(' ').reverse()
-  b = b.split(' ').reverse()
-  var score = 0
-  var shorterPron = (a.length < b.length) ? a : b
-
-  for (var i in shorterPron) {
-    if (a[i] === b[i]) {
-      score++
-    } else {
-      return score
-    }
-  }
-
-  return score
-}
+const json = require('../map').json;
+var map = JSON.parse(json);
 
 var rhymes = function(input) {
-    if (!input) return []
-
-    input = input.toLowerCase()
-
-    if (!cmu_dict[input]) return []
-
-    var inputPron = cmu_dict[input];
-    var results = [];
+    input = input.toLowerCase();
     
-    for (var i = 0; i < words.length; i += 1) {
-        var word = words[i];
-
-        var score = countMatchingTrailingSyllablesInPronunciations(inputPron, word.pron)
-        if (score > 1) {
-            results.push(merge(word, {score: score}))
-        }
-
-        if (results.length > 3) {
-            break;
-        }
+    if (map[input] == null) {
+        return [];
     }
 
-  results = sortBy(results, 'score').reverse()
-  return results;
-}
+    return map[input];
+};
 
 module.exports = {
-    rhymes: rhymes,
-    words: words
+    rhymes: rhymes
 };

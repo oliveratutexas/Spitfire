@@ -20,7 +20,8 @@ cmu_words.forEach(function(cmu_word) {
         var idx = words.indexOf(cmu_word);
         our_cmu_dict[cmu_word] = {
             'pronunciation': our_cmu_dict[cmu_word],
-            'partOfSpeech': arr[idx]['Part of speech']
+            'partOfSpeech': arr[idx]['Part of speech'],
+            'frequency': arr[idx]['Frequency']
         };
     } else {
         our_cmu_dict[cmu_word] = null;
