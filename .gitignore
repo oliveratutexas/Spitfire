@@ -31,4 +31,4 @@ node_modules
 .DS_Store
 
 # Ignore the bundled js files
-dist/
+# dist/
