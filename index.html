@@ -28,21 +28,15 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Web Oscilloscope</title>
-      
-      <link href="js/normalize.css" rel="stylesheet" type="text/css">
-    <link href="js/app.css" rel="stylesheet" type="text/css">
-    <script src="js/app.js"></script>    
     
 </head>
 <body>
   <div class="wrapper">
     
     <header>
-      <h1>Web Oscilloscope</h1>  
     </header>
 
-    <canvas class="visualizer" width="1024" height="200"></canvas>         
+    <canvas class="visualizer" width="1024" height="400"></canvas>         
 
     <form class="controls hide">      
       <table>
@@ -232,22 +226,7 @@
       </tr>
       </table>
   
-  
-    <h2>    
-    <p>
-    Signal flow:
-    source + oscillator -> merger -> inputgain -> filter -> analyser -> outputgain -> destination           
-    <p>    
-    Hint: You can use your sound card (line-in/microphone input) as an Oscilloscope. 
-        <b>NOTE</b>: If the voltage is above 1 volt, add an voltage divider to prevent 
-        the soundcard from being damaged by excessive voltage input.    
-    </p>
-    <p>Please update your browser (Firefox/Chrome/Safari) if this page doesn't work for you.</p>
-    
-    <img src="soundcard_oscilloscope.jpg">             
-    </h2>        
-
-    </form>
+     </form>
     
     
       

@@ -606,7 +606,7 @@ function visualize() {
         }
       }            
 
-      canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+      canvasCtx.fillStyle = 'rgb(255, 255, 255)';
       canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
       canvasCtx.lineWidth = 2;                        
@@ -631,7 +631,7 @@ function visualize() {
       canvasCtx.stroke();
       
       canvasCtx.beginPath();
-      canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+      canvasCtx.strokeStyle = 'rgb(180, 180, 180)';
       //console.log("triggerStart="+triggerStart);                        
 
       for(var i = triggerStart; i < bufferLength; i++) {
@@ -660,13 +660,7 @@ function visualize() {
       canvasCtx.stroke();
       
       // draw cursorX
-      if (plotterMode){
-        var y = HEIGHT/2 - dataArrayVisualize[cursorX-1]*HEIGHT/2;
-        canvasCtx.beginPath();
-        canvasCtx.fillStyle = 'rgb(200, 0, 0,0)';
-        canvasCtx.arc(cursorX, y, 10, 10, 0, Math.PI*2);
-        canvasCtx.fill();        
-      }
+     
 
       
       
