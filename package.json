@@ -19,6 +19,7 @@
   "dependencies": {
     "browserify": "^11.2.0",
     "cmu-pronouncing-dictionary": "^1.0.3",
+    "csvtojson": "^0.4.3",
     "lodash": "^3.10.1",
     "rhymes": "^1.0.1",
     "word2vec": "^0.9.2"

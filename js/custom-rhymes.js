@@ -29,27 +29,30 @@ var countMatchingTrailingSyllablesInPronunciations = function(a, b) {
 }
 
 var rhymes = function(input) {
-  if (!input) return []
+    if (!input) return []
 
-  input = input.toLowerCase()
+    input = input.toLowerCase()
 
-  if (!cmu_dict[input]) return []
+    if (!cmu_dict[input]) return []
 
-  var inputPron = cmu_dict[input]
-  var results = []
+    var inputPron = cmu_dict[input];
+    var results = [];
+    
+    for (var i = 0; i < words.length; i += 1) {
+        var word = words[i];
 
-  words.forEach(function (word) {
-    var score = countMatchingTrailingSyllablesInPronunciations(inputPron, word.pron)
-    if (score > 1) {
-      results.push(merge(word, {score: score}))
+        var score = countMatchingTrailingSyllablesInPronunciations(inputPron, word.pron)
+        if (score > 1) {
+            results.push(merge(word, {score: score}))
+        }
+
+        if (results.length > 3) {
+            break;
+        }
     }
-  })
 
-  results = sortBy(results, 'score')
-    .reverse()
-    .slice(0, 20)
-
-  return results
+  results = sortBy(results, 'score').reverse()
+  return results;
 }
 
 module.exports = {
