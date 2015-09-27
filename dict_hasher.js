@@ -3,7 +3,7 @@ const sortBy = require('lodash').sortBy
 const sortByAll = require('lodash').sortByAll
 const fs = require('fs');
 
-const our_cmu_dict = JSON.parse(fs.readFileSync('our_cmu_dict').toString());
+const our_cmu_dict = JSON.parse(fs.readFileSync(process.argv.slice(2)[0]).toString());
 
 const map = {};
 
@@ -68,5 +68,5 @@ ocd.forEach(function(obj) {
     map[input] = results;
 });
 
-fs.writeFileSync('map', JSON.stringify(map));
-console.log(JSON.parse(fs.readFileSync('map').toString()));
+fs.writeFileSync(process.argv.slice(2)[1], JSON.stringify(map));
+// console.log(JSON.parse(fs.readFileSync('map').toString()));

@@ -3,7 +3,7 @@ var cmu_dict = require('cmu-pronouncing-dictionary');
 
 our_cmu_dict = JSON.parse(JSON.stringify(cmu_dict));
 
-var json = fs.readFileSync('words');
+var json = fs.readFileSync(process.argv.slice(2)[0]);
 var arr = JSON.parse(json);
 
 var words = arr
@@ -29,4 +29,4 @@ cmu_words.forEach(function(cmu_word) {
     }
 });
 
-fs.writeFileSync('our_cmu_dict', JSON.stringify(our_cmu_dict));
+fs.writeFileSync(process.argv.slice(2)[1], JSON.stringify(our_cmu_dict));
