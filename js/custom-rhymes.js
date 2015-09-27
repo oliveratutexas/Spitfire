@@ -9,7 +9,7 @@ Object.keys(cmu_dict).forEach(function (word) {
     word: word,
     pron: cmu_dict[word]
   })
-})
+})  
 
 var countMatchingTrailingSyllablesInPronunciations = function(a, b) {
   a = a.split(' ').reverse()
