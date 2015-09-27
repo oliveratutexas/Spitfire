@@ -331,7 +331,7 @@ function init(){
   canvas = document.querySelector('.visualizer');  
   visualSelect = document.getElementById("visual");
   intendedWidth = 768;
-  canvas.setAttribute('width',intendedWidth);
+  canvas.setAttribute('width',2000);
   canvasCtx = canvas.getContext("2d");    
   
   visualSelect.onchange = function() {
@@ -668,19 +668,7 @@ function visualize() {
         canvasCtx.fill();        
       }
 
-      // draw trigger      
-      canvasCtx.beginPath();
-      canvasCtx.strokeStyle = 'rgb(200, 0, 0,0)';      
-      /*var y = HEIGHT/2 - (triggerY+triggerThres) * HEIGHT/2;      
-      canvasCtx.moveTo(0, y);
-      canvasCtx.lineTo(20, y);*/      
-      var y = HEIGHT/2 - (triggerY+triggerThres) * HEIGHT/2;      
-      canvasCtx.moveTo(0, y);
-      canvasCtx.lineTo(20, y);            
-      var y = HEIGHT/2 - (triggerY-triggerThres) * HEIGHT/2;      
-      canvasCtx.moveTo(0, y);
-      canvasCtx.lineTo(20, y);
-      canvasCtx.stroke();
+      
       
       //alert("draw");
     };
