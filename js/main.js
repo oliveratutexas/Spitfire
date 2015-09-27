@@ -523,9 +523,23 @@ function findTrigger(dataArray){
   return 0;
 }
 
+function getWidth() {
+  if (self.innerHeight) {
+    return self.innerWidth;
+  }
+
+  if (document.documentElement && document.documentElement.clientHeight) {
+    return document.documentElement.clientWidth;
+  }
+
+  if (document.body) {
+    return document.body.clientWidth;
+  }
+}
+
 
 function visualize() {
-  WIDTH = canvas.width;
+  WIDTH = getWidth();
   HEIGHT = canvas.height;
 
 
@@ -607,7 +621,7 @@ function visualize() {
       }            
 
       canvasCtx.fillStyle = 'rgb(255, 255, 255)';
-      canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+      canvasCtx.fillRect(0, 0, getWidth(), HEIGHT);
 
       canvasCtx.lineWidth = 2;                        
 
@@ -678,15 +692,16 @@ function visualize() {
     canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
     function drawFreq() {
+      var local_width = getWidth();
       drawVisual = requestAnimationFrame(drawFreq);      
       var bands = bufferLength;      
       var oneband = (audioCtx.sampleRate/2) / bands;                  
       if (!pause) analyser.getByteFrequencyData(dataArrayFreq);              
 
       canvasCtx.fillStyle = 'rgb(0, 0, 0,0)';
-      canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+      canvasCtx.fillRect(0, 0, local_width, HEIGHT);
 
-      var barWidth = (WIDTH / bands);      
+      var barWidth = (local_width / bands);      
       var barHeight;
       var x = 0;
       var maxvalue = 0;
