@@ -1,4 +1,4 @@
-const json = require('../map').json;
+const json = require('../map3').json;
 var map = JSON.parse(json);
 
 var rhymes = function(input) {

@@ -68,5 +68,6 @@ ocd.forEach(function(obj) {
     map[input] = results;
 });
 
+console.log(map)
 fs.writeFileSync(process.argv.slice(2)[1], JSON.stringify(map));
-// console.log(JSON.parse(fs.readFileSync('map').toString()));
+// console.log(JSON.parse(fs.readFileSync(process.argv.slice(2)[1]).toString()));

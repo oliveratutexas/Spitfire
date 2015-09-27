@@ -1,14 +1,14 @@
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 
 /* Roboto Font */
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:200,300,400);
 
 html {
     font-size: 16px;
 }
 
 body {
-	font-family: Roboto, sans-serif;
+	font-family: 'Avenir', sans-serif;
 	background-color: #f7f7f7;
 	color: #5A5A5A;
 }
@@ -16,9 +16,20 @@ body {
 ul {
 	list-style: none;
 }
-
+/*
+.spinner {
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 50%;
+    border: 1px solid red;
+    width: 3rem;
+    margin: 2.75rem auto 2rem;
+}
+*/
 #suggestions {
-	padding-top: 200px;
+    font-weight: 300;
+	padding-top: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,14 +38,14 @@ ul {
 
 .tier1 {
 	font-size: 6em;
-	line-height: 90%;
+	/*line-height: 90%;*/
 	padding-bottom: 10px;
 	margin: 0;
 }
 
 .tier2 {
 	font-size: 3.5em;
-	padding: 0;
+	padding: 5px;
 	opacity: .7;
 	margin: 0;
 }
@@ -46,23 +57,14 @@ ul {
 	margin: 0;
 }
 
-#bars {
-    height: 30px;
-    left: 50%;
-    margin: -30px 0 0 -20px;
-    position: absolute;
-    top: 50%;
-    width: 40px;
-}
-
 .icon {
     display: flex;
     justify-content: center;
-    margin: 2.5rem;
-    padding: 10px;
-	position: absolute;
+    /*align-items: center;*/
+    margin: 2.75rem auto 2rem;
+    padding: 12px;
     font-size: 3rem;
-    height: 3rem;
+    /*height: 3rem;*/
     width: 3rem;
     border-radius: 50%;
     border: 1px solid #ccc;
@@ -70,38 +72,32 @@ ul {
     transition: all .25s linear;
 }
 
-.ion-android-microphone {
-    color: rgba(165,44,39,1);
+.ion-android-microphone.on {
+    color: rgba(190,0,8,1);
     box-shadow: 0 2px 1px #ccc;
+    animation: NAME-YOUR-ANIMATION 2s infinite; /* IE 10+, Fx 29+ */
+    transition: all .25s linear;
 }
 
-.bar {
-   background: #666;
-    bottom: 1px;
-    height: 3px;
+hide {
+    display: none !important;
+}
+
+canvas {
+    position: fixed;
+}
+
+.wrapper {
+    display: flex;
+    z-index: -1;
     position: absolute;
-    width: 3px;      
-    animation: sound 0ms -800ms linear infinite alternate;
+    justify-content: center;
+    top: 50px;
 }
 
-@keyframes sound {
-    0% {
-       opacity: .35;
-        height: 3px; 
-    }
-    100% {
-        opacity: 1;       
-        height: 28px;        
-    }
-}
 
-.bar1  { left: 1px; animation-duration: 474ms; }
-.bar2  { left: 5px; animation-duration: 433ms; }
-.bar3  { left: 9px; animation-duration: 407ms; }
-.bar4  { left: 13px; animation-duration: 458ms; }
-.bar5  { left: 17px; animation-duration: 400ms; }
-.bar6  { left: 21px; animation-duration: 427ms; }
-.bar7  { left: 25px; animation-duration: 441ms; }
-.bar8  { left: 29px; animation-duration: 419ms; }
-.bar9  { left: 33px; animation-duration: 487ms; }
-.bar10 { left: 37px; animation-duration: 442ms; }​
+@keyframes NAME-YOUR-ANIMATION {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1; }
+  100%   { opacity: 0.7; }
+}

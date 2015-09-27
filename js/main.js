@@ -10,32 +10,78 @@ var NUM_SUGGESTIONS = 6;
 recognition.onstart = function() { console.log('started'); };
 recognition.onspeechend = function() {};
 
-
-recognition.onerror = function(event) {console.log('error', event)}
-recognition.onend = function() {console.log('end')}
-
-var suggestionsNode = document.querySelector('#suggestions');
-
-var updateSuggestions = function(arr) {
-    var i;
-    var children = suggestionsNode.querySelectorAll('p');
-    
-    for (i = 0; i < NUM_SUGGESTIONS; i += 1) {
-        children[i].textContent = '';
-        if (arr[i] != null) {
-            children[i].textContent = arr[i];
-        }
-    }
+var stringify = function(obj) {
+    return JSON.parse(JSON.stringify(obj));
 };
 
+recognition.onerror = function(event) {console.log('error', event); recognition.start();}
+recognition.onend = function() {console.log('end'); recognition.start();}
+
+var suggestionsNode = document.querySelector('#suggestions');
+var prompt = document.querySelector('.prompt');
+
+var Updater = function() {
+    var prev = null;
+
+    return function(arr) {
+        var i;
+        var children = suggestionsNode.querySelectorAll('p');
+        
+        // If length is 0, bail.
+        if (arr.length === 0) {
+            return;
+        }
+
+        // push easy ones if the same
+        if (prev != null && stringify(arr.slice().sort()) === prev) {
+            arr.unshift('wanted', 'just', 'tell', 'take');
+        };
+
+        prev = stringify(arr);
+
+
+        // prompt.style.display = 'block';
+        // setTimeout(function() {
+        //     prompt.style.display = 'none';
+        // }, 1500);
+
+        for (i = 0; i < NUM_SUGGESTIONS; i += 1) {
+            children[i].textContent = '';
+            if (arr[i] != null) {
+                children[i].textContent = arr[i];
+            }
+        }
+    };
+};
+
+var updateSuggestions = Updater();
+
 var compute = function() {
-    console.log('computing')
     var full = interim_transcript.split(/\s+/);
     var last = full[full.length - 1];
-    var results = rhymes.rhymes(last).slice(1);
+
+    if (last === 'ok') {
+        last = 'okay';
+    }
+
+    console.log('computing', last)
+
+
+    // Not the same word
+    var results = rhymes.rhymes(last).filter(function(r) {
+        return r !== last;
+    });
     
-    console.log('split interim', full);
-    console.log('results', results);
+    // Plural
+    if (results.length === 0 && last.charAt(last.length - 1) === 's') {
+        last = last.slice(0,-1);
+        results = rhymes.rhymes(last).filter(function(r) {
+            return r !== last;
+        });
+    }
+
+    // console.log('split interim', full);
+    // console.log('results', results);
     
     return results;
 };
@@ -88,12 +134,10 @@ var fn = function(e) {
     var mic = document.querySelector('.icon.mic');
     
     mic.toggle = function() {
-        if (mic.classList.contains('ion-android-microphone')) {
-            mic.classList.remove('ion-android-microphone');
-            mic.classList.add('ion-android-microphone-off');
+        if (mic.classList.contains('on')) {
+            mic.classList.remove('on');
         } else {
-            mic.classList.remove('ion-android-microphone-off');
-            mic.classList.add('ion-android-microphone');
+            mic.classList.add('on');
         }
     };
 
