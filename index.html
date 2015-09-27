@@ -4,6 +4,11 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <style>
+    .hide{
+        display: none;
+    }
+    </style>
 </head>
 <body>
     <button id="start">Start listening</button>
@@ -14,6 +19,256 @@
             <li class="third"></li>
         </ul>
     </div>
+
+
+
+
+
+<head class="hide">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Web Oscilloscope</title>
+      
+      <link href="js/normalize.css" rel="stylesheet" type="text/css">
+    <link href="js/app.css" rel="stylesheet" type="text/css">
+    <script src="js/app.js"></script>    
+    
+</head>
+<body>
+  <div class="wrapper">
+    
+    <header>
+      <h1>Web Oscilloscope</h1>  
+    </header>
+
+    <canvas class="visualizer" width="1024" height="200"></canvas>         
+
+    <form class="controls hide">      
+      <table>
+      <tr>
+      <td>
+        <label for="visual">Visualization</label>
+        <select id="visual" name="visual">                    
+          <option value="frequencybars">Frequency spectrum (kHz)</option>
+          <option selected="selected" value="sinewave">Time signal (ms)</option>
+          <option value="off">Off</option>
+        </select>
+      </td>
+      <td>
+        <label for="timescale">Time scale</label>
+        <select id="timescale" name="timescale">          
+          <option selected="selected" value="1">x1</option>
+          <option value="2">x2</option>          
+          <option value="5">x5</option>
+          <option value="10">x10</option>                    
+          <option value="20">x20</option>
+        </select>
+      </td>
+      <td>
+        <label for="timeofs">Time ofs</label>
+        <input id="timeofs" type="range" min="0.0" max="1023" step="10" value ="0"/>
+        <output for="timeofs" id="timeofslabel"></output>         
+      </td>
+      <td>
+        <label for="ampscale">Input gain</label>
+        <select id="ampscale" name="ampscale">
+          <option value="0.01">x0.01</option>
+          <option value="0.05">x0.05</option>
+          <option value="0.1">x0.1</option>          
+          <option value="0.2">x0.2</option>
+          <option value="0.5">x0.5</option>
+          <option selected="selected" value="1">x1</option>          
+          <option value="2">x2</option>          
+          <option value="5">x5</option>
+          <option value="10">x10</option>                    
+          <option value="20">x20</option>                    
+          <option value="50">x50</option>
+          <option value="100">x100</option>
+        </select>
+      </td>
+      <td>
+        <label for="math">Math</label>
+        <select id="math" name="math">
+          <option value="max">Max</option>
+          <option value="min">Min</option>          
+          <option value="minmax">MinMax</option>
+          <option value="minmax_inv">1/MinMax</option>
+          <option value="delta">Delta</option> 
+          <option value="firstminmax">FirstMinMax</option>
+          <option selected="selected" value="off">Off</option>                              
+        </select>
+      </td>
+      <td>
+        <label for="fftmindb">FFT dB_min</label>
+        <input id="fftmindb" type="range" min="-200.0" max="-35" step="0.05" value ="-90"/>         
+      </td>
+      <td>
+        <label for="fftmaxdb">dB_max</label>
+        <input id="fftmaxdb" type="range" min="-80.0" max="200" step="0.05" value ="-10"/>         
+      </td>      
+      <td>
+        <label for="fftsmooth">time_smoothing</label>
+        <input id="fftsmooth" type="range" min="0.0" max="0.99" step="0.01" value ="0.85"/>         
+      </td>
+      </tr>
+      <tr>
+      <td>
+        <label for="filter">Filter</label>
+        <select id="filter" name="filter">          
+          <option selected="selected" value="off">Off</option>                  
+          <option value="lowpass">Lowpass</option>          
+          <option value="highpass">Highpass</option>
+          <option value="bandpass">Bandpass</option>
+          <option value="lowshelf">Lowshelf</option>
+          <option value="highshelf">Highshelf</option>
+          <option value="peaking">Peaking</option>
+          <option value="notch">Notch</option>
+          <option value="allpass">Allpass</option>
+          <option value="matched">Matched</option>
+        </select>        
+      </td>
+      <td>      
+        <label for="filterfreq">Frequency (Hz)</label>                
+        <input id="filterfreq" type="text" min="1" max="20000" step="0.1" value ="9615"/>
+        <!-- <output for="filterfreq" id="filterfreqlabel"></output> -->                                           
+      </td>
+      <td>
+        <label for="filterquality">Quality (Q factor)</label>
+        <input id="filterquality" type="range" min="0.0001" max="1000.0" step="1" value ="100"/>
+        <output for="filterquality" id="filterqualitylabel"></output>                 
+      </td>            
+      <td>
+        <label for="filtergain">Gain (dB)</label>
+        <input id="filtergain" type="range" min="-40" max="40" step="1" value ="25"/>
+        <output for="filtergain" id="filtergainlabel"></output>                 
+      </td>
+      <td colspan="2" rowspan="5">
+        <label id="signallabel" for="signal">Matched filter template</label>                
+        <select id="signal" name="signal">          
+          <option value="ardumower">Ardumower</option>
+          <option selected="selected" value="ardumower_diff">Ardumower (differential)</option>
+          <option value="developer_test_diff">Developer Test (differential)</option>                    
+          <option value="robomow_rl500">Robomow RL500</option>
+        </select>                                              
+        <textarea id="template" rows="9" cols="30"></textarea>      
+        <a id="" class="play">Play template</a>       
+      </td>
+      </td>            
+      </tr>
+      <tr>      
+      <td>
+        <label for="triggermode">Trigger</label>
+        <select id="triggermode" name="triggermode">          
+          <option selected="selected" value="continuous">Continuous</option>          
+          <option value="onetime">One-time</option>
+          <option value="off">Off</option>
+        </select>
+      </td>
+      <td>
+        <label for="triggersignal">Signal</label>
+        <select id="triggersignal" name="triggersignal">          
+          <option selected="selected" value="rising">Rising edge</option>          
+          <option value="falling">Falling edge</option>          
+        </select>
+      </td>
+      <td>
+        <label for="triggerlevel">Level</label>
+        <input id="triggerlevel" type="range" min="-0.9" max="0.9" step="0.05" value ="0"/>         
+      </td>      
+      <td>
+        <label for="triggerthres">Threshold</label>
+        <input id="triggerthres" type="range" min="0.0" max="0.9" step="0.05" value ="0.05"/>         
+      </td>
+      </tr>          
+      <tr>
+      <td>            
+       <label for="tone">Tone</label>
+        <select id="tone" name="tone">       
+          <option value="50">50 Hz</option>             
+          <option value="100">100 Hz</option>
+          <option value="440">440 Hz</option>
+          <option value="1000">1000 Hz</option>          
+          <option value="2000">2000 Hz</option>
+          <option value="2404">2404 Hz</option>
+          <option value="3500">3500 Hz</option>
+          <option value="4808">4808 Hz</option>
+          <option value="8000">8000 Hz</option>
+          <option value="9615">9615 Hz</option>
+          <option value="10000">10000 Hz</option>
+          <option value="22000">22000 Hz</option>
+          <option selected="selected" value="off">Off</option>          
+        </select>       
+      </td>    
+      <td>      
+       <label for="toneshape">Shape</label>
+        <select id="toneshape" name="toneshape">                                                                                     
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+          <option value="triangle">Triangle</option>          
+          <option selected="selected"  value="sine">Sine</option>     
+        </select>       
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <a id="" class="playfile">Play file</a>       
+        </td>                         
+        <td colspan="3">          
+          <input id="audio_file" type="file" accept="audio/*" />          
+          <audio id="audio_player" />          
+        </td>                                    
+      </tr>
+      <tr>
+      <td>
+        <a id="" class="mute">Mute</a>       
+      </td>
+      <td colspan="2">
+        <a id="" class="pause">Pause</a>       
+      </td>
+      <td>                    
+          <a id="" class="save">Save (paused)</a>                    
+      </td>
+      </tr>
+      </table>
+  
+  
+    <h2>    
+    <p>
+    Signal flow:
+    source + oscillator -> merger -> inputgain -> filter -> analyser -> outputgain -> destination           
+    <p>    
+    Hint: You can use your sound card (line-in/microphone input) as an Oscilloscope. 
+        <b>NOTE</b>: If the voltage is above 1 volt, add an voltage divider to prevent 
+        the soundcard from being damaged by excessive voltage input.    
+    </p>
+    <p>Please update your browser (Firefox/Chrome/Safari) if this page doesn't work for you.</p>
+    
+    <img src="soundcard_oscilloscope.jpg">             
+    </h2>        
+
+    </form>
+    
+    
+      
+
+  </div>
+    
+            
+
+</body></html>  
+
+
+
+
+
+
+
+
+
+
+
+
     <script type="text/javascript" src="./dist/bundle.js"></script>
 </body>
 </html>
