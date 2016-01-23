@@ -34,6 +34,7 @@ var Updater = function() {
 
         // push easy ones if the same
         if (prev != null && stringify(arr.slice().sort()) === prev) {
+	    //four primer words to keep the user's flow going
             arr.unshift('wanted', 'just', 'tell', 'take');
         };
 
@@ -100,6 +101,13 @@ recognition.addEventListener('result', function(event) {
     }
 });
 
+
+/**
+ * Program states for...
+ * 	animation - button glow
+ * 	
+ * 
+*/
 var fn = function(e) {
     var listening = false;
 

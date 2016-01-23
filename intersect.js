@@ -1,3 +1,9 @@
+/** 
+ * Intersects the CMU pronounciation dictionary with the other ... dictionary 
+ *
+ */
+
+
 var fs = require('fs');
 var cmu_dict = require('cmu-pronouncing-dictionary');
 

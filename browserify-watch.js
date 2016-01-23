@@ -1,6 +1,9 @@
 const spawn = require('child_process').spawn;
 const fs = require('fs');
 
+/**
+ * Re-bundles files upon changes.
+*/
 fs.watch('js/', { persistent: true, recursive: true }, function(e, filename) {
     console.log("msg");
     
