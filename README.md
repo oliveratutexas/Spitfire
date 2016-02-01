@@ -42,7 +42,7 @@ CSS:
 Scripts:
 
 - `src/app/main.js` is the entry point for the core of the app including the data from `map.json`. It is fairly large (around 48 MB) and should be loaded async.
-- `src/js/main.js` will be used for other scripts such as showing a loading indicator, async loading `dist/app/main.js`, etc.
+- `src/js/main.js` will be used for other scripts such as showing and hiding a loading indicator, async loading of `dist/app/main.js`, etc.
 
 #### `data/`
 
@@ -68,7 +68,7 @@ Pre-processed data can be found in `data/`. To process data again, run:
 $ npm run process-data
 ``` 
 
-The single command essentially runs the following serially:
+The single command above essentially runs the following serially:
 
 ```
 $ node data-processing/parse-csv.js
@@ -77,7 +77,7 @@ $ node data-processing/best-matches.js
 ```
 
 
-The final result (that you most likely use in the app) is `map.json`. 
+The final result (that you most likely use in the app) is `data/map.json`. 
 
 ```js
 var fs = require('fs);
@@ -85,7 +85,7 @@ var mapJSON = fs.readFileSync('map.json').toString();
 var map = JSON.parse(mapJSON);
 ```
 
-`map` is now:
+The variable `map` is now:
 
 ```js
 {
@@ -122,9 +122,9 @@ $ http-server
 
 Visit `http://localhost:8080` in your browser.
 
-## Deployment
+## Deploy
 
-TODO: use wercker.
+TODO: use wercker and do not check in `dist/` into git.
 
 For now, produce compiled files for deployment by running:
 
