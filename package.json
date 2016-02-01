@@ -10,6 +10,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "browserify": "^13.0.0",
+    "cmu-pronouncing-dictionary": "^1.0.3",
     "csvtojson": "^0.5.1",
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.5",
