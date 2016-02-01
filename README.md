@@ -6,7 +6,7 @@ Real-time lyrics assistant.
 
 - [x] dev setup
 - [x] data processing
-- [] voice input and feedback
+- [ ] voice input and feedback
 
 ## Setup
 
@@ -80,7 +80,7 @@ $ node data-processing/best-matches.js
 The final result (that you most likely use in the app) is `data/map.json`. 
 
 ```js
-var fs = require('fs);
+var fs = require('fs');
 var mapJSON = fs.readFileSync('map.json').toString();
 var map = JSON.parse(mapJSON);
 ```
