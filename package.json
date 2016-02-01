@@ -1,5 +1,5 @@
 {
-  "name": "spitfire",
+  "name": "Spitfire",
   "version": "0.1.0",
   "description": "Real-time lyrics assistant",
   "main": "src/js/index.js",

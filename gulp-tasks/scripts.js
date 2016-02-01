@@ -8,18 +8,18 @@ var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
 var brfs = require('brfs');
 
-var isDebug = function() {
+var isDeploy = function() {
     // node, gulp, compile, --debug
     if (process.argv.length < 4) {
         return;
     }
-    return process.argv[2] === 'compile' && process.argv[3] === '--debug';
+    return process.argv[2] === 'compile' && process.argv[3] === '--deploy';
 };
 
 // app
 var appCustomOpts = {
     entries: ['./src/app/main.js'],
-    debug: isDebug()
+    debug: !isDeploy()
 };
 
 var appOpts = assign({}, watchify.args, appCustomOpts);
@@ -31,7 +31,7 @@ var appBundle = function() {
         .on('error', gutil.log.bind(gutil, 'Browserify Error app'))
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: isDebug()}))
+        .pipe(sourcemaps.init({loadMaps: !isDeploy()}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/app'));
 };
@@ -43,7 +43,7 @@ gulp.task('app', appBundle);
 //  js
 var jsCustomOpts = {
     entries: ['./src/js/main.js'],
-    debug: isDebug()
+    debug: !isDeploy()
 };
 
 var jsOpts = assign({}, watchify.args, jsCustomOpts);
@@ -55,7 +55,7 @@ var jsBundle = function() {
         .on('error', gutil.log.bind(gutil, 'Browserify Error js'))
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: isDebug()}))
+        .pipe(sourcemaps.init({loadMaps: !isDeploy()}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/js'));
 };

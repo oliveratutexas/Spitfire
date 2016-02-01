@@ -11,7 +11,7 @@ var outFile = path.join(dataDir, 'map.json');
 
 var commonCMUDict = JSON.parse(fs.readFileSync(inFile).toString());
 var commonCMUDictWords = Object.keys(commonCMUDict);
-var map = {}; // final map
+var map = Object.create(null); // final map
 
 // Returns the number of syllables in a pronunciation string.
 // Example: "AA IO" => 2
@@ -71,14 +71,8 @@ ocd.forEach(function(obj) {
     results = sortByAll(results, ['score', 'coolness']);
     results.reverse();
     
-    // rename to shorter keys
     map[word] = results.map(function(obj) { 
-        return {
-            w: obj['word'],
-            s: obj['score'],
-            f: obj['frequency'],
-            c: obj['coolness']
-        };
+        return obj.word;
     });
 
     progressBar.tick();
