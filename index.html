@@ -4,8 +4,14 @@
     <title>Spitfire</title>
     <link rel="stylesheet" type="text/css" href="dist/css/main.css">
     <script src="dist/js/main.js"></script>
+    <script>
+    var host = 'oliveratutexas.github.io';
+    if ((host === window.location.host) && (window.location.protocol === 'http:')) {
+        window.location.protocol = 'https'; // don't use 'https:' with the colon because it's not Firefox compatible.
+    }
+    </script>
 </head>
 <body>
-    Hello, world!
+
 </body>
 </html>

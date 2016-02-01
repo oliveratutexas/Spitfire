@@ -2,7 +2,7 @@
   "name": "spitfire",
   "version": "0.1.0",
   "description": "Real-time lyrics assistant",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

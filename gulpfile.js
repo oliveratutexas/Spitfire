@@ -11,8 +11,8 @@ var plumber = require('gulp-plumber');
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./src/js/index.js'],
-  debug: true
+    entries: ['./src/js/index.js'],
+    debug: true
 };
 
 var opts = assign({}, watchify.args, customOpts);
