@@ -60,6 +60,6 @@ var jsBundle = function() {
         .pipe(gulp.dest('./dist/js'));
 };
 
-appBrowserify.on('update', jsBundle);
-appBrowserify.on('log', gutil.log);
+jsBrowserify.on('update', jsBundle);
+jsBrowserify.on('log', gutil.log);
 gulp.task('js', jsBundle);
