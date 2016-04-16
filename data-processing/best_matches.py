@@ -24,6 +24,8 @@ def csv_to_json(csvFile,jsonFile):
         json.dump(row, jsonFile)
         jsonFile.write('\n')
 
+    json.dump(csvFile.readline(),jsonFile)
+
 def intersect():
     pass
 
